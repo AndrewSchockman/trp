@@ -22,33 +22,47 @@ A consumer MUST reject an invalid document. Whether a valid document is conforma
 
 ## Definitions
 
-Domain: The area of use a profile is written for, for example manufacturing safety or clinical workflow.
-
-Profile: A TRP document. It states the trust requirements that apply at a point of use.
-
-Subject: The system, workflow, or agent assessed against a profile. The profile belongs to the domain or point of use. The subject is measured against it, not described by it.
+Assurance mapping: An optional note linking a profile's requirements to outside frameworks such as NIST AI RMF or ISO/IEC 42001. It is informative and does not change what the profile requires (Section 10).
 
 Author: The domain expert who writes and maintains a profile.
 
-Evaluation source: Any source that assesses a subject against a profile and produces a standing. This standard defines the profile the source reads and the standing it emits. It does not define how the assessment is performed.
+Authority: The party responsible for a profile. It is named in the profile and used to say who it came from and, when signing is used, to confirm it (Section 3.1).
 
-Standing: The labeled outcome of an assessment, drawn from the profile's declared bands, for example good, review, or failing.
+Conformant: A valid profile whose values reflect a real domain and were set by a qualified author. Whether a valid profile is also conformant is a human judgment, not an automatic check (see Conformance).
 
-Relying party: Any party that reads a profile, or a standing produced against it, to decide whether to trust or interact with the subject.
-
-Hard rule: A condition that is decisive on its own. If met, its action applies regardless of scored standing (Section 3.4).
-
-Required standing: The minimum standing a profile requires of a subject (Section 3.7).
+Domain: The area of use a profile is written for, for example, manufacturing safety or clinical workflow.
 
 Domain template: A profile populated for a class of environment, published for others to adopt and adapt (Section 9).
 
+Drift: A steady trend toward an unsafe state across repeated checks, separate from the thresholds. A signal can drift even while its values stay in an acceptable range (Section 3.5).
+
+Evaluation source: Any source that assesses a subject against a profile and produces a standing. This standard defines the profile the source reads and the standing it emits. It does not define how the assessment is performed.
+
+Hard rule: A condition that is decisive on its own. If met, its action applies regardless of scored standing (Section 3.4).
+
+Profile: A TRP document. It states the trust requirements that apply at a point of use.
+
+Relying party: Any party that reads a profile, or a standing produced against it, to decide whether to trust or interact with the subject.
+
+Required standing: The minimum standing a profile requires of a subject (Section 3.7).
+
+Scored signal: Something measurable a profile watches, with the points at which it becomes a concern or a problem. Scored signals feed into the standing. The profile lists them; the evaluation source measures them (Section 3.3).
+
+Severity: The rank of a standing band, where lower is better. It lets any reader order the bands without relying on their names (Section 3.6).
+
+Standing: The labeled outcome of an assessment, drawn from the profile's declared bands, for example good, review, or failing.
+
+Subject: The system, workflow, or agent assessed against a profile. The profile belongs to the domain or point of use. The subject is measured against it, not described by it.
+
+Valid: A TRP document that follows the structural rules in Sections 2 through 4 and passes the schema. This check is automatic (see Conformance).
+
 ## 1. Overview
 
-A Trust Requirements Profile specifies the behavior expected of a subject, the system, workflow, or agent being assessed, in a given domain, and is authored by a domain expert. An evaluation source reads the profile, assesses the subject, and produces a standing. Keeping the profile separate from the evaluation source means one source can serve any domain by loading a different profile, and the people who understand a domain are the ones who define what trustworthy behavior means in it.
+A Trust Requirements Profile specifies the behavior expected of a subject, the system, workflow, or agent being assessed, in a given domain, and is authored by a domain expert. An evaluation source reads the profile, assesses the subject, and produces a standing. Keeping the profile separate from the evaluation source means one source can serve any domain by loading a different profile, and the people who understand a domain define what expected and trustworthy behavior mean in it.
 
-A TRP is a data document. It contains no executable logic. It does not define how signals are combined into a standing. The profile is the open, portable requirements contract. Assessment against it is open to any source.
+A TRP is a data document. It contains no executable logic. It does not define how signals are combined into a standing. The profile is the open, portable requirements contract. Assessment against it can come from any source.
 
-This specification is a framework, not a fixed form. It defines the structure a profile takes, not a single profile everyone fills in. Each industry, and each organization within it, writes its own profiles to its own requirements. Think of it as a machine-readable language for stating trust requirements, not a one-size template.
+This specification is a developing framework that defines a profile's structure. Each industry, and each organization within it, writes its own profiles to its own requirements. Think of it as a machine-readable language for stating trust requirements rather than a template.
 
 ## 2. Document format
 
@@ -123,7 +137,7 @@ A condition is valid only for the operand type it applies to. A scalar value is 
 
 ### 3.5 Drift definition
 
-`drift` describes a sustained trend toward an unsafe state across successive assessments. It is independent of the thresholds and does not require a crossing: a signal may drift while its values remain within an acceptable range. Thresholds evaluate a signal's current value; drift evaluates its trend over the window. A signal may show one, both, or neither.
+Drift describes a sustained trend toward an unsafe state across successive assessments. It is independent of the thresholds and does not require a crossing: a signal may drift while its values remain within an acceptable range. Thresholds evaluate a signal's current value; drift evaluates its trend over the window. A signal may show one, both, or neither.
 
 | Field | Type | Card. | Req. | Description |
 | :-- | :-- | :-- | :-- | :-- |
@@ -150,7 +164,7 @@ Any artifact that reports a standing for a subject MUST use a band declared here
 
 | Field | Type | Card. | Req. | Description |
 | :-- | :-- | :-- | :-- | :-- |
-| minimum_acceptable_band | string | 1 | MUST | The lowest acceptable band. A subject whose standing has higher severity than this band does not meet the requirement. MUST be a declared band. |
+| minimum_acceptable_band | string | 1 | MUST | The lowest acceptable band. A subject whose standing is more severe than this band does not meet the requirement. MUST be a declared band. |
 | source_requirement | string | 0..1 | SHOULD | Any requirement the profile places on the evaluation source, for example that it be independent or accredited. The standard does not name a source. A profile MAY require properties of one. |
 | response_bands | array | 0..1 | MAY | The response expected at each observed band, applied to the subject's authorization to operate, using the vocabulary full, restricted, suspended, revoked. The profile specifies the intended response for each band. How a subject arrives at a band is out of scope. |
 
@@ -190,7 +204,7 @@ Inheritance resolves as follows:
 
 - The child inherits all fields of the base.
 - For single-valued fields, a value declared in the child replaces the base value. A field the child does not declare keeps the base value.
-- For scored_signals and hard_rules, entries are matched by their identifier (signal name, or rule). A child entry with the same identifier as a base entry replaces that entry. A child entry with a new identifier is added.
+- For scored_signals and hard_rules, entries are matched by their identifier (signal name or rule). A child entry with the same identifier as a base entry replaces that entry. A child entry with a new identifier is added.
 - A child MUST NOT remove a signal or rule declared in the base. Inheritance may add or override, not delete. This prevents a refinement from silently weakening a base profile.
 - extends chains to a single base. A base that itself uses extends is resolved first, from the root down.
 
@@ -198,7 +212,7 @@ Inheritance resolves as follows:
 
 A profile MAY be signed by its authoring authority so a relying party can confirm it is unaltered and attributed. When signing is used, the signed content MUST be a canonical serialization of the profile, for example JSON Canonicalization Scheme (RFC 8785). Canonical serialization means writing the JSON in a single agreed-upon, byte-for-byte form, so two systems produce identical bytes for the same content, and a signature verifies on both. Without it, a trivial reformat would break the signature. The signature SHOULD use an established signed-document format rather than a bespoke one, and the profile SHOULD record the verification key's algorithm and location.
 
-The exact canonicalization and envelope are left to the implementation in this draft and are expected to be fixed in a later version.
+This draft leaves the exact canonicalization and envelope to the implementation and expects to fix them in a later version.
 
 ## 9. Domain taxonomy and templates
 
@@ -220,15 +234,15 @@ Out of scope for the format: how a subject is scored, how enforcement is carried
 
 This section states how the standard changes over time without fragmenting. It is the part most declaration formats leave undefined, which is why they either ossify or fork.
 
-Stable core. The fields and rules in Sections 2 through 4 are the core. Every TRP everywhere has them, and they interoperate regardless of domain. The core changes rarely and only through a MAJOR version.
+Stable core: The fields and rules in Sections 2 through 4 are the core. Every TRP everywhere has them, and they interoperate regardless of domain. The core changes rarely and only through a MAJOR version.
 
-Profiles specialize the core. A domain template, and any profile that extends it, adds domain-specific signals, rules, and constraints on top of the core. A profile may require fields the core leaves optional and may tighten thresholds. A profile MUST NOT break the core or redefine a core field. This is how one standard serves manufacturing, healthcare, and finance without a separate standard for each. The domain-specific complexity lives in profiles, not in the core.
+Profiles specialize the core: A domain template, and any profile that extends it, adds domain-specific signals, rules, and constraints on top of the core. A profile may require fields the core leaves optional and may tighten thresholds. A profile MUST NOT break the core or redefine a core field. This is how one standard serves manufacturing, healthcare, and finance without a separate standard for each. The domain-specific complexity lives in profiles, not in the core.
 
-Extension points. New ideas enter at the declared extension points (Section 7), not by changing the core. An industry can innovate in its own profiles and extensions without changing the standard and without permission. A generic consumer still reads the document because unknown extensions are ignored rather than rejected.
+Extension points: New ideas enter at the declared extension points (Section 7), not by changing the core. An industry can innovate in its own profiles and extensions without changing the standard and without permission. A generic consumer still reads the document because it ignores unknown extensions rather than rejecting them.
 
-Promotion. When an extension proves broadly useful across many domains, the standard's governing body MAY promote it into the core in a later version. This lets the core learn from the edges instead of trying to anticipate every domain at the start.
+Promotion: When an extension proves broadly useful across many domains, the standard's governing body MAY promote it into the core in a later version. This lets the core learn from the edges instead of trying to anticipate every domain at the start.
 
-Governance of the core. The stable core and the promotion decision are governed by the standard's independent steward (see the README). Openness under this standard covers the TRP core and its published profiles. Implementations built on it may be licensed however their authors choose.
+Governance of the core: The stable core and the promotion decision are governed by the standard's independent steward (see the README). Openness under this standard covers the TRP core and its published profiles. Implementations built on the TRP standard may be licensed however their authors choose.
 
 ## 13. Versioning and change policy
 
@@ -236,13 +250,13 @@ The specification and each profile use semantic versioning. Within 0.x, MINOR ve
 
 ## 14. License
 
-The specification is released under the Apache License 2.0. Individual profiles carry their own license field.
+This specification is released under the Apache License 2.0. Individual profiles carry their own license field.
 
 ## 15. Example
 
 See `examples/manufacturing-safety/trp.json` for a complete, valid TRP for a manufacturing robot cell.
 
-Read field by field; that example says:
+Example Fields:
 
 - Identity and metadata: this is the manufacturing-safety profile, version 1.0.0, written against spec version 0.5, by a named author, under a stated license, classified under industry manufacturing and use case robot-cell-safety.
 - Scope: It governs one collaborative robot cell operating near people, and it explicitly does not cover how the system is scored or how a halt is enforced.
@@ -252,4 +266,4 @@ Read field by field; that example says:
 - Standing bands: the system's overall standing is good, review, or failing, ordered by severity.
 - Required standing: the system must hold at least review standing; the evaluation source should be independent for audit or insurance use; and each band maps to a response from full down to suspended.
 
-Nothing in the example says how any value is computed. It states what is required and the outcome vocabulary. That separation is the point.
+The goal of this specification is to establish a single, open way to communicate trust requirements that any domain can use and any evaluator can read. Trust and transparency across autonomous systems can then live outside of proprietary, closed systems.
