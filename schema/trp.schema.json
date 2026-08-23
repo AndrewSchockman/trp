@@ -68,14 +68,17 @@
     },
     "created_at": {
       "type": "string",
+      "format": "date-time",
       "description": "RFC 3339 timestamp of creation."
     },
     "valid_from": {
       "type": "string",
+      "format": "date-time",
       "description": "RFC 3339. The profile is not in force before this time."
     },
     "valid_to": {
       "type": "string",
+      "format": "date-time",
       "description": "RFC 3339. The profile is not in force after this time. If both are present, valid_to must be at or after valid_from."
     },
     "license": {
@@ -284,7 +287,9 @@
           },
           "severity": {
             "type": "integer",
-            "description": "Ordinal rank, lower is better."
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Ordinal rank from 1 to 10, lower is better."
           },
           "range": {
             "type": "string",
