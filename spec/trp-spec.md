@@ -85,9 +85,9 @@ Every document SHOULD declare `$schema`, the URI of the JSON Schema it validates
 | description | string | 1 | SHOULD | Human-readable summary. |
 | authority | string | 1 | MUST | Identifier of the party responsible for the profile. |
 | author | object | 0..1 | SHOULD | The authoring domain expert: name, role, optional credential. |
-| created_at | string | 1 | SHOULD | RFC 3339 timestamp of creation. |
-| valid_from | string | 0..1 | MAY | RFC 3339. The profile is not in force before this time. |
-| valid_to | string | 0..1 | MAY | RFC 3339. The profile is not in force after this time. If both are present, valid_to MUST be at or after valid_from. |
+| created_at | string (date-time) | 1 | SHOULD | RFC 3339 / ISO 8601 date-time timestamp of creation. Validated by the schema date-time format. |
+| valid_from | string (date-time) | 0..1 | MAY | RFC 3339 date-time. The profile is not in force before this time. |
+| valid_to | string (date-time) | 0..1 | MAY | RFC 3339 date-time. The profile is not in force after this time. If both are present, valid_to MUST be at or after valid_from. |
 | license | string | 0..1 | SHOULD | License identifier for the profile, for example an SPDX identifier. |
 | taxonomy | object | 1 | SHOULD | Classification: industry and use_case (Section 9). |
 
@@ -153,7 +153,7 @@ The evaluation source determines how a trend is judged over the window. The prof
 | Field | Type | Card. | Req. | Description |
 | :-- | :-- | :-- | :-- | :-- |
 | band | string | 1 | MUST | Band name, for example good, review, failing. Unique within the array. |
-| severity | integer | 1 | MUST | Ordinal rank, lower is better, so consumers compare bands without hardcoding names. |
+| severity | integer (1-10) | 1 | MUST | Ordinal rank from 1 to 10, lower is better, so consumers compare bands without hardcoding names. |
 | range | string | 0..1 | MAY | Description of what falls in the band. |
 
 Any artifact that reports a standing for a subject MUST use a band declared here.
