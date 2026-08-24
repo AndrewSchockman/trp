@@ -287,7 +287,7 @@
           },
           "severity": {
             "type": "integer",
-            "minimum": 1,
+            "minimum": 0,
             "maximum": 10,
             "description": "Ordinal rank from 1 to 10, lower is better."
           },
