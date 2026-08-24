@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) [![Spec](https://img.shields.io/badge/Spec-v0.5_Draft-orange.svg)](spec/trp-spec.md) [![Schema](https://img.shields.io/badge/Schema-Draft_2020--12-green.svg)](schema/trp.schema.json)
+
 # Trust Requirements Profile (TRP)
 
 The promise of AI, from breakthroughs in medicine to broad economic opportunity, depends on trust. The real question is whether we will solve the standardization and interoperability of trust across the entire AI ecosystem, or leave it fragmented inside a handful of closed platforms. Trust is the enablement layer for a broad and inclusive AI economy, yet today the greatest developments in AI are controlled by fewer than ten companies. This creates technical uncertainty, economic co-dependence, and establishes monopolies on AI's potential while stifling development and concentrating many kinds of risk. Trust cannot be solved in a vacuum. Ecosystems are established on a foundation of standards, primitives, and collaborative development among all participants.
