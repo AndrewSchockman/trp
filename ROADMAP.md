@@ -1,6 +1,6 @@
 # Roadmap
 
-This roadmap reflects the current planning direction for the TRP specification and ecosystem. Priorities may shift based on community feedback and the outcomes of the scoping work.
+This roadmap reflects the current planning direction for the TRP specification and ecosystem. Priorities will evolve based on community feedback and the outcomes of the scoping work with NSF and OSU.
 
 ## Current (v0.5 Draft)
 
