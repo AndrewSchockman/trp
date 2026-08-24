@@ -1,0 +1,172 @@
+{
+  "$schema": "https://aitrustalliance.com/schema/trp/0.5/trp.schema.json",
+  "$id": "https://aitrustalliance.com/profiles/healthcare-data-governance/1.0.0/trp.json",
+  "trp_id": "healthcare-data-governance",
+  "spec_version": "0.5",
+  "version": "1.0.0",
+  "name": "Healthcare AI data governance",
+  "description": "Reference Trust Requirements Profile for an AI system processing protected health information. Illustrative draft values, not certified compliance thresholds.",
+  "authority": "aitrustalliance.com",
+  "author": {
+    "name": "AI Trust Alliance reference templates",
+    "role": "Reference profile author"
+  },
+  "created_at": "2026-08-24T00:00:00Z",
+  "license": "Apache-2.0",
+  "taxonomy": {
+    "industry": "healthcare",
+    "use_case": "phi-data-governance"
+  },
+  "scope": {
+    "intended_use": "Trust requirements for an AI system that accesses, processes, or generates outputs from protected health information.",
+    "boundary": "One AI workflow operating on PHI within a single covered entity or business associate relationship.",
+    "jurisdiction": ["US"],
+    "out_of_scope": [
+      "How the system is scored against these signals",
+      "How a halt or other action is enforced",
+      "Clinical decision-making or FDA device classification"
+    ]
+  },
+  "scored_signals": [
+    {
+      "signal": "data_deidentification_confidence",
+      "weight": 25,
+      "direction": "lower_is_unsafe",
+      "warning_threshold": 0.92,
+      "critical_threshold": 0.80,
+      "unit": "ratio",
+      "reason": "Low confidence in de-identification increases re-identification risk for patient data."
+    },
+    {
+      "signal": "consent_coverage_ratio",
+      "weight": 20,
+      "direction": "lower_is_unsafe",
+      "warning_threshold": 0.95,
+      "critical_threshold": 0.85,
+      "unit": "ratio",
+      "reason": "Records processed without verified consent or authorization basis create compliance exposure."
+    },
+    {
+      "signal": "model_subgroup_performance_gap",
+      "weight": 15,
+      "direction": "higher_is_unsafe",
+      "warning_threshold": 0.08,
+      "critical_threshold": 0.15,
+      "unit": "ratio",
+      "reason": "Performance disparity across demographic subgroups indicates bias risk in clinical or operational use."
+    },
+    {
+      "signal": "data_freshness_hours",
+      "weight": 10,
+      "direction": "higher_is_unsafe",
+      "warning_threshold": 48,
+      "critical_threshold": 168,
+      "unit": "hours",
+      "reason": "Stale data may not reflect current patient status or updated records."
+    },
+    {
+      "signal": "access_log_completeness",
+      "weight": 15,
+      "direction": "lower_is_unsafe",
+      "warning_threshold": 0.98,
+      "critical_threshold": 0.90,
+      "unit": "ratio",
+      "reason": "Incomplete access logs prevent audit trail reconstruction required by HIPAA."
+    },
+    {
+      "signal": "model_confidence",
+      "weight": 5,
+      "direction": "lower_is_unsafe",
+      "warning_threshold": 0.85,
+      "critical_threshold": 0.65,
+      "unit": "ratio",
+      "reason": "Low confidence outputs should not be used for decisions affecting patient care or records."
+    }
+  ],
+  "hard_rules": [
+    {
+      "rule": "no_valid_hipaa_basis",
+      "field": "hipaa_basis_verified",
+      "condition": "is_false",
+      "action": "halt"
+    },
+    {
+      "rule": "irb_approval_expired",
+      "field": "irb_status",
+      "condition": "equals",
+      "value": "expired",
+      "action": "block_startup"
+    },
+    {
+      "rule": "dua_missing_for_external_share",
+      "field": "external_sharing_without_dua",
+      "condition": "is_true",
+      "action": "halt"
+    },
+    {
+      "rule": "phi_in_training_data_unreviewed",
+      "field": "phi_training_review_status",
+      "condition": "equals",
+      "value": "not_reviewed",
+      "action": "block_startup"
+    }
+  ],
+  "drift": {
+    "window": 5,
+    "signals": [
+      "data_deidentification_confidence",
+      "model_subgroup_performance_gap"
+    ]
+  },
+  "standing_bands": [
+    {
+      "band": "compliant",
+      "severity": 0,
+      "range": "All signals within acceptable range, all hard rules satisfied, HIPAA basis verified."
+    },
+    {
+      "band": "review",
+      "severity": 1,
+      "range": "One or more signals in warning range; human review required before continued processing."
+    },
+    {
+      "band": "non-compliant",
+      "severity": 2,
+      "range": "A signal in critical range or a hard rule met; PHI processing must stop."
+    }
+  ],
+  "required_standing": {
+    "minimum_acceptable_band": "review",
+    "source_requirement": "For audit or regulatory use, the evaluation source should be independent of the covered entity.",
+    "response_bands": [
+      {
+        "band": "compliant",
+        "response": "full"
+      },
+      {
+        "band": "review",
+        "response": "restricted"
+      },
+      {
+        "band": "non-compliant",
+        "response": "suspended"
+      }
+    ]
+  },
+  "assurance_mapping": [
+    {
+      "framework": "HIPAA Security Rule",
+      "reference": "45 CFR 164.312"
+    },
+    {
+      "framework": "NIST AI RMF",
+      "reference": "GOVERN 1.1, MAP 3.2, MEASURE 2.6"
+    }
+  ],
+  "notes": [
+    "Threshold values are illustrative draft values, not certified compliance thresholds.",
+    "Standing bands describe how standing is expressed; they do not define how it is computed.",
+    "This profile is a reference template. Real deployments should set values based on institutional policy, applicable state law, and data-source contracts.",
+    "Based on preliminary healthcare governance research by the AI Trust Alliance applied research program."
+  ]
+}
