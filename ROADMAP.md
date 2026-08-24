@@ -1,0 +1,43 @@
+# Roadmap
+
+This roadmap reflects the current planning direction for the TRP specification and ecosystem. Priorities may shift based on community feedback and the outcomes of the scoping work.
+
+## Current (v0.5 Draft)
+
+- [x] Core specification published
+- [x] JSON Schema for automated validation (Draft 2020-12)
+- [x] Manufacturing safety reference profile
+- [x] Healthcare data governance reference profile
+- [x] Reference evaluator (tools/)
+- [x] Apache 2.0 licensing
+- [x] Contribution and governance guidelines
+
+## Near-Term
+
+- [ ] Conformance test suite for cross-evaluator agreement
+- [ ] Additional domain profiles (financial operations, insurance, defense)
+- [ ] Per-signal drift window configuration (see [Issue #2])
+- [ ] Extension namespacing and registry design (see [Issue #3])
+- [ ] Evidence format specification for evaluation results
+- [ ] Zenodo DOI for academic citation
+- [ ] Community feedback on v0.5 draft incorporated
+
+## Medium-Term
+
+- [ ] Spec v1.0 candidate with community input
+- [ ] Formal semantics for the requirement language
+- [ ] Composition and inheritance verification tooling
+- [ ] Integration guidance for DID/VC and agent-identity systems
+- [ ] Training pathway and profile-authoring guide
+- [ ] Domain working groups seeded through workshops
+
+## Long-Term
+
+- [ ] Promotion to an independent standards body
+- [ ] Multi-stakeholder governance fully operational
+- [ ] Interoperability testing across independent evaluation sources
+- [ ] Adoption in regulated industries (healthcare, manufacturing, financial services)
+
+## How to Contribute
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose profiles, spec changes, or new tooling. Open an issue to suggest a roadmap item.
