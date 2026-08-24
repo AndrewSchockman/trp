@@ -33,25 +33,46 @@ A trust requirement cannot belong to a frontier lab. When the definition of a tr
 ## Repository Contents
 
 ```
-README.md                              this file
-spec/trp-spec.md                       the specification
-schema/trp.schema.json                 the JSON Schema a profile validates against
-examples/manufacturing-safety/trp.json a complete, valid reference profile
-LICENSE                                Apache License 2.0
+README.md                                       this file
+CONTRIBUTING.md                                  how to contribute profiles and spec changes
+GOVERNANCE.md                                    stewardship model and decision process
+ROADMAP.md                                       project direction and planned work
+spec/trp-spec.md                                 the specification
+schema/trp.schema.json                           the JSON Schema a profile validates against
+examples/manufacturing-safety/trp.json           reference profile: collaborative robot cell safety
+examples/healthcare-data-governance/trp.json     reference profile: AI processing of protected health information
+tools/evaluate.py                                TRP Reference Evaluator: loads any profile and evaluates data against it
+tools/README.md                                  evaluator documentation and usage
+LICENSE                                          Apache License 2.0
 ```
 
 ## Getting Started
 
-Read the specification in `spec/` for the full field-by-field definition. Then look at `examples/manufacturing-safety/trp.json`, a complete profile for a collaborative robot cell, to see the format in use.
+Read the specification in `spec/` for the full field-by-field definition. Then look at the reference profiles in `examples/` to see the format in use across two domains:
 
-To check a profile against the schema, use any standard JSON Schema validator (Draft 2020-12). For example, with the Python `jsonschema` library:
+- **Manufacturing safety** (`examples/manufacturing-safety/trp.json`): a collaborative robot cell with scored signals for human distance, robot speed, vibration, temperature, model confidence, and data quality, plus hard rules for emergency stop, exclusion zone, and certification status.
+- **Healthcare data governance** (`examples/healthcare-data-governance/trp.json`): an AI system processing protected health information, with scored signals for de-identification confidence, consent coverage, subgroup performance gaps, and access log completeness, plus hard rules for HIPAA basis, IRB status, and data use agreements.
+
+To check a profile against the schema, use any standard JSON Schema validator (Draft 2020-12):
 
 ```bash
 pip install jsonschema
 python -c "import json,jsonschema; jsonschema.Draft202012Validator(json.load(open('schema/trp.schema.json'))).validate(json.load(open('examples/manufacturing-safety/trp.json')))"
 ```
 
-No output means the profile is valid. This checks the profile's structure only. It is separate from assessing a subject against the profile, which an evaluation source performs and which is out of scope for this standard.
+No output means the profile is valid.
+
+To evaluate data against a profile, use the TRP Reference Evaluator:
+
+```bash
+# Generate a sample with safe default values
+python3 tools/evaluate.py examples/manufacturing-safety/trp.json --generate-sample > sample.json
+
+# Evaluate the sample against the profile
+python3 tools/evaluate.py examples/manufacturing-safety/trp.json sample.json
+```
+
+The evaluator loads the profile, checks hard rules, scores signals against thresholds, tracks drift, and assigns a standing from the profile's declared bands. See `tools/README.md` for full documentation.
 
 ## Conformance
 
@@ -59,7 +80,7 @@ There are two levels. A *valid* profile satisfies the structural and referential
 
 ## Governance
 
-An independent steward governs the TRP core and the decision to promote extensions into the core, the AI Trust Alliance, a neutral standards body separate from any single vendor. Openness under this standard covers the TRP core and its published profiles. Implementations built on it may be licensed however their authors choose.
+An independent steward governs the TRP core and the decision to promote extensions into the core, the AI Trust Alliance, a neutral standards body separate from any single vendor. The Ohio State University is a founding member. See [GOVERNANCE.md](GOVERNANCE.md) for the full stewardship model and decision process. Openness under this standard covers the TRP core and its published profiles. Implementations built on it may be licensed however their authors choose.
 
 ## Your Contribution
 
@@ -67,13 +88,13 @@ The defining technology of our time is being shaped, designed, and distributed r
 
 Join a growing consortium of leaders, industry practitioners, academic and technical researchers, and those driven to bring the power of autonomy to novel challenges. Bring your technical depth, your industry expertise, or the perspective only your vantage point can offer. What you help build stays open to everyone, and your work remains your own.
 
-To take part, open an issue or a pull request. Profiles you contribute carry their own author, version, license, and taxonomy, so your work stays attributed, versioned, and yours.
+To take part, see [CONTRIBUTING.md](CONTRIBUTING.md) for how to submit profiles, propose spec changes, or improve tooling. Profiles you contribute carry their own author, version, license, and taxonomy, so your work stays attributed, versioned, and yours.
 
 TRP is a foundational element of the trust infrastructure the AI economy requires.
 
 ## Status
 
-This is an early public draft. While it is complete enough to read, validate against, and author profiles, it is unfinished enough that field names and requirements will likely change before 1.0. Feedback from practitioners at all levels is our top priority.
+This is an early public draft. While it is complete enough to read, validate against, and author profiles, it is unfinished enough that field names and requirements will likely change before 1.0. See [ROADMAP.md](ROADMAP.md) for planned work. Feedback from practitioners at all levels is our top priority.
 
 ## License
 
