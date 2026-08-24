@@ -2,7 +2,7 @@
 
 ## Stewardship
 
-The Trust Requirements Profile specification is governed by the AI Trust Alliance, an independent standards body established to develop and steward the trust requirements of the AI economy. The Ohio State University is a founding member. The Alliance is separate from any single vendor, so the standard belongs to the ecosystem rather than to its authors.
+The Trust Requirements Profile specification is governed by the AI Trust Alliance, a standards body established to develop and steward the trust requirements of the AI economy, structured from its founding to operate as a neutral, multi-stakeholder organization. The Ohio State University is a founding member. The long-term governance model, including the transition to fully independent stewardship, is a core deliverable of the current scoping work. The Alliance is separate from any single vendor, so the standard belongs to the ecosystem rather than to its authors.
 
 ## Decision-Making
 
