@@ -4,7 +4,7 @@ The promise of AI, from breakthroughs in medicine to broad economic opportunity,
 
 Remarkable research and transformational capabilities are sitting on the sidelines, waiting for a trusted path to mainstream use. At the same time, companies reshape their AI strategies around cost, access, control, and ownership of their data, models, weights, and infrastructure. We believe open standards that invite greater investment, sovereign development, and collaborative innovation open the door to economic inclusion and human flourishing. Open trust standards are the pathway to democratized access and adoption of the world's most promising technology.
 
-Trust is the enablement infrastructure of the AI economy. TRP is the standard that lets every part of that ecosystem operate openly and be trusted, opening the door to a proliferation of new participants and to inference that is more specialized, more efficient, and closer to the value creators. We are building and recruiting into an open ecosystem to put the promise of AI within everyone's reach, and TRP is its foundation.
+Trust infrastructure is the foundation of the AI economy. TRP is the standard that lets every part of the AI ecosystem operate with openly shared and enforced trust requirements, opening the door to a proliferation of new participants and to inference that is more specialized, more efficient, and closer to the value creators. We are building and recruiting into an open ecosystem to put the promise of AI within everyone's reach, starting with the foundational Trust Requirements Profile (TRP) standard.
 
 Version 0.5, public working draft. Field names and normative requirements may still change before 1.0.
 
