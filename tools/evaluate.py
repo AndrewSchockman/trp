@@ -44,13 +44,17 @@ class ScoredSignal:
 
     def severity(self, value: float) -> float:
         if self.low_is_bad:
-            raw = (self.warning_threshold - value) / (
-                self.warning_threshold - self.critical_threshold
-            )
+            denom = self.warning_threshold - self.critical_threshold
+            if denom == 0:
+                raw = 0.0 if value >= self.warning_threshold else 1.0
+            else:
+                raw = (self.warning_threshold - value) / denom
         else:
-            raw = (value - self.warning_threshold) / (
-                self.critical_threshold - self.warning_threshold
-            )
+            denom = self.critical_threshold - self.warning_threshold
+            if denom == 0:
+                raw = 0.0 if value <= self.warning_threshold else 1.0
+            else:
+                raw = (value - self.warning_threshold) / denom
         return max(0.0, min(1.0, raw))
 
 
