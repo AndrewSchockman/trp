@@ -16,7 +16,7 @@ Licensed under the Apache License 2.0. Copyright 2026 Striv AI.
 
 ## Technical Overview
 
-A Trust Requirements Profile (TRP) is a machine-readable trust contract that specifies the behavior expected of a subject, system, agent, model, workflow, or data source in a given domain, and the standing it must hold to be trusted there. A domain expert authors the profile. Any qualified evaluation source reads that trust contract, assesses a subject against it, and produces a standing.
+A Trust Requirements Profile (TRP) is a universal trust taxonomy and machine-readable contract that specifies the operating requirements, trust boundaries, and standing criteria for any subject, system, agent, model, workflow, or data source in a given domain. A domain expert authors the profile. Any qualified evaluation source reads that contract, assesses a subject against it, and produces a standing.
 
 The standard defines the profile, the requirements it carries, and the vocabulary of outcomes. Assessment against a profile is open to any qualified evaluation source, which is what gives the standard its reach: one source can serve any domain by loading a different profile; independent implementations interoperate because they share the format. Practitioners who understand a domain are best positioned to define what trustworthy behavior means in it.
 
