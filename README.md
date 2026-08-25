@@ -94,7 +94,7 @@ TRP is a foundational element of the trust infrastructure the AI economy require
 
 ## Status
 
-This is an early public draft. While it is complete enough to read, validate against, and author profiles, it is unfinished enough that field names and requirements will likely change before 1.0. See [ROADMAP.md](ROADMAP.md) for planned work. Feedback from practitioners at all levels is our top priority.
+This is an early public draft. While it is complete enough to read, validate against, and author profiles, it is unfinished enough that field names and requirements will likely change before 1.0. See [ROADMAP.md](ROADMAP.md) for planned work. Feedback from practitioners at any and all levels is our top priority.
 
 ## License
 
