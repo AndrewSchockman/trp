@@ -16,8 +16,8 @@ This roadmap reflects the current planning direction for the TRP specification a
 
 - [ ] Conformance test suite for cross-evaluator agreement
 - [ ] Additional domain profiles (financial operations, insurance, defense)
-- [ ] Per-signal drift window configuration (see [Issue #2])
-- [ ] Extension namespacing and registry design (see [Issue #3])
+- [ ] Per-signal drift window configuration (see [Issue #2][issue-2])
+- [ ] Extension namespacing and registry design (see [Issue #3][issue-3])
 - [ ] Evidence format specification for evaluation results
 - [ ] Zenodo DOI for academic citation
 - [ ] Community feedback on v0.5 draft incorporated
@@ -41,3 +41,6 @@ This roadmap reflects the current planning direction for the TRP specification a
 ## How to Contribute
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose profiles, spec changes, or new tooling. Open an issue to suggest a roadmap item.
+
+[issue-2]: https://github.com/aitrustalliance/trp/issues/2
+[issue-3]: https://github.com/aitrustalliance/trp/issues/3
