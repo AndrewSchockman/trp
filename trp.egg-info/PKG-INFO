@@ -1,10 +1,35 @@
-[![CI](https://github.com/aitrustalliance/trp/actions/workflows/ci.yml/badge.svg)](https://github.com/aitrustalliance/trp/actions/workflows/ci.yml) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) [![Spec](https://img.shields.io/badge/Spec-v0.5_Draft-orange.svg)](spec/trp-spec.md) [![Release](https://img.shields.io/badge/Release-v0.5.1-blue.svg)](https://github.com/aitrustalliance/trp/releases) [![Schema](https://img.shields.io/badge/Schema-Draft_2020--12-green.svg)](schema/trp.schema.json) [![Conformance](https://img.shields.io/badge/Conformance-27%2F27_passing-brightgreen.svg)](tests/run_conformance.py) [![Evaluators](https://img.shields.io/badge/Evaluators-Python_%7C_Node.js-blue.svg)](tools/) [![Cross--evaluator](https://img.shields.io/badge/Cross--evaluator-verified-brightgreen.svg)](.github/workflows/ci.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22099403.svg)](https://doi.org/10.5281/zenodo.22099403)
+Metadata-Version: 2.4
+Name: trp
+Version: 0.5.1
+Summary: Trust Requirements Profile: an open standard for stating and verifying the trust requirements of AI and autonomous systems.
+Author: Striv AI, AI Trust Alliance
+License: Apache-2.0
+Project-URL: Homepage, https://github.com/aitrustalliance/trp
+Project-URL: Repository, https://github.com/aitrustalliance/trp
+Project-URL: Specification, https://doi.org/10.5281/zenodo.22099403
+Keywords: ai-governance,trust,conformance,verification,ai-safety,compliance,autonomous-systems
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Classifier: Topic :: Software Development :: Quality Assurance
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: jsonschema>=4.0
+Dynamic: license-file
+
+[![CI](https://github.com/aitrustalliance/trp/actions/workflows/ci.yml/badge.svg)](https://github.com/aitrustalliance/trp/actions/workflows/ci.yml) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE) [![Spec](https://img.shields.io/badge/Spec-v0.5_Draft-orange.svg)](spec/trp-spec.md) [![Schema](https://img.shields.io/badge/Schema-Draft_2020--12-green.svg)](schema/trp.schema.json) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22099404.svg)](https://doi.org/10.5281/zenodo.22099404)
 
 # Trust Requirements Profile (TRP)
 
-**An open standard for stating and verifying the trust requirements of AI and autonomous systems.**
-
-The promise of AI, from breakthroughs in medicine to broad economic opportunity, depends on trust. The question is whether we solve standardization and interoperability across the AI ecosystem, or leave it fragmented inside a handful of closed platforms. Trust is the enablement layer for a broad and inclusive AI economy, yet today the greatest developments in AI are concentrated in fewer than ten companies. That creates technical uncertainty, economic co-dependence, and concentrates risk in a way that narrows who can participate. Trust cannot be solved in a vacuum. This is the Trust Gap: the absence of shared, open infrastructure for declaring and verifying trust across the AI ecosystem. Ecosystems are built on standards, primitives, and collaborative development among all participants.
+The promise of AI, from breakthroughs in medicine to broad economic opportunity, depends on trust. The real question is whether we will solve standardization and interoperability across the entire AI ecosystem, or leave it fragmented inside a handful of closed platforms. Trust is the enablement layer for a broad and inclusive AI economy, yet today the greatest developments in AI are controlled by fewer than ten companies. This creates technical uncertainty, economic co-dependence, and establishes monopolies on AI's potential while stifling development and concentrating many kinds of risk. Trust cannot be solved in a vacuum. This is the Trust Gap: the absence of shared, open infrastructure for declaring and verifying trust across the AI ecosystem. Ecosystems are built on standards, primitives, and collaborative development among all participants.
 
 Remarkable research and transformational capabilities are sitting on the sidelines, waiting for a trusted path to mainstream use. At the same time, companies reshape their AI strategies around cost, access, control, and ownership of their data, models, weights, and infrastructure. We believe open standards that invite greater investment, sovereign development, and collaborative innovation open the door to economic inclusion and human flourishing. Open trust standards are the pathway to democratized access and adoption of the world's most promising technology.
 
@@ -12,7 +37,7 @@ Trust infrastructure is the foundation of the AI economy. TRP is the standard th
 
 Trust requirements for AI will be defined with or without an open standard. Without open trust, authority defaults according to resources rather than utility. TRP exists to prevent that outcome.
 
-Specification version 0.5, public working draft. Field names and normative requirements may still change before 1.0.
+Version 0.5, public working draft. Field names and normative requirements may still change before 1.0.
 
 Licensed under the Apache License 2.0. Copyright 2026 Striv AI.
 
@@ -26,7 +51,7 @@ The standard defines the profile, the requirements it carries, and the vocabular
 
 TRP follows a document-based governance model: simple, declarative, machine-readable documents that carry trust requirements across organizational boundaries, the same pattern that has proven most durable for coordination at scale.
 
-A TRP is declarative and precise: it states what trust requires and how outcomes are expressed, in a form any machine can read and verify. Defined tightly enough that any conforming evaluation source acting on the same profile reaches the same result, it makes trust checkable and portable across the ecosystem rather than locked to one vendor's tooling. The standard is open, and the implementations built on it, the engines, tools, and services that act on a profile are what evolve into an ecosystem.
+A TRP is declarative and precise: it states what trust requires and how outcomes are expressed, in a form any machine can read and verify. Defined tightly enough that any conforming evaluation source acting on the same profile reaches the same result, it makes trust checkable and portable across the ecosystem rather than locked to one vendor's tooling. The standard is open, and the implementations built on it- the engines, tools, and services that act on a profile are what evolve into an ecosystem.
 
 ## The Trust Requirements Layer
 
@@ -34,7 +59,7 @@ Trust is not a property of any single part of the stack. It lives in the interac
 
 A trust requirement is that missing piece: a portable contract of interaction requirements that any two parties can read, describing how they are allowed to interact and holding the evidence of whether they did. It is not limited to behavior, and it is not limited to agents. A profile can specify what may pass between parties (payload), where it may go (region), how long it may run (dwell time), the ceilings it must stay under (limits such as token counts), and how far conditions may drift before the interaction is no longer trusted (drift tolerance), along with whatever else a domain demands. The requirements run both ways, so each side knows what it is agreeing to and is measured against the same terms. That is what makes trust portable across the whole stack instead of something argued over at every boundary.
 
-A trust requirement cannot belong to any single platform. When the definition of a trusted interaction lives inside one company's system, every other participant is trusting that company rather than the system, and the record is theirs to shape. That holds regardless of how well-intentioned the company is, which makes it a structural problem rather than a question of conduct. This is a big part of the trust gap in AI: trust is compartmentalized inside individual platforms and fragmented into private formats and protocols that cannot agree across parties. An open standard confronts fragmentation and breaks platform lock-in. Trust orchestration is the problem: ensuring every party in an interaction can prove it met the requirements. TRP is built to solve it. TRP integrates with identity, authorization, and enforcement. It must be open, because it requires shared agreement across the ecosystem.
+A trust requirement cannot belong to a frontier lab. When the definition of a trusted interaction lives inside one company's platform, every other participant is trusting that company rather than the system, and the record is theirs to shape. Trust that can only be issued by the same few providers who build and sell AI models is not trust; it is a conflict of interest. This is a big part of the trust gap in AI: compartmentalized or held hostage inside individual platforms, and fragmented into private formats and protocols that cannot agree across parties. An open standard confronts fragmentation and breaks platform lock-in. Trust orchestration is the problem: ensuring every party in an interaction can prove it met the requirements. TRP solves it. TRP integrates with identity, authorization, and enforcement. It must be open, because it requires shared agreement and understanding across the ecosystem.
 
 ## Repository Contents
 
@@ -52,7 +77,7 @@ tools/
   evaluate.js                                    reference evaluator (Node.js)
   README.md                                      evaluator documentation and usage
 tests/
-  run_conformance.py                             conformance test suite (27 tests)
+  run_conformance.py                             conformance test suite (17 tests)
   profiles/valid/                                profiles that must pass schema validation
   profiles/invalid/                              profiles that must fail schema validation
   evidence/                                      evidence samples with expected evaluation outcomes
@@ -70,66 +95,6 @@ requirements.txt                                 Python dependencies
 LICENSE                                          Apache License 2.0
 ```
 
-## Install
-
-```bash
-pip install trp
-trp demo
-```
-
-`trp demo` runs a complete evaluation against a bundled profile and prints the result. No clone, no configuration.
-
-| Command | Description |
-| --- | --- |
-| `trp demo` | Run a complete example end to end |
-| `trp init manufacturing` | Print a starter profile to stdout |
-| `trp validate trp.json` | Validate a profile against the schema |
-| `trp sample trp.json` | Generate sample evidence for a profile |
-| `trp evaluate trp.json evidence.json` | Evaluate evidence against a profile |
-| `trp version` | Print version information |
-
-Author your first profile:
-
-```bash
-trp init manufacturing > my-profile.json
-trp validate my-profile.json
-trp sample my-profile.json > evidence.json
-trp evaluate my-profile.json evidence.json
-```
-
-Use it as a library:
-
-```python
-from trp import generate_sample, load_profile, evaluate
-
-profile = load_profile("my-profile.json")
-evidence = generate_sample(profile)      # or supply your own observed values
-result = evaluate(profile, evidence)
-
-print(result["standing"])                # good, review, or failing
-print(result["response"])                # full, restricted, suspended, or revoked
-```
-
-Signals absent from the evidence are handled by each signal's declared `on_missing` policy, so a
-partial submission does not silently pass.
-
-The evaluator loads the profile, checks hard rules, scores signals against thresholds, tracks drift, and assigns a standing from the profile's declared bands.
-
-A Node.js evaluator is included at `tools/evaluate.js`. It is developed independently of the Python implementation, shares no code with it, and produces identical standings. Cross-implementation agreement is verified in continuous integration on every commit.
-
-```bash
-node tools/evaluate.js examples/manufacturing-safety/trp.json evidence.json
-```
-
-Working from a clone rather than the package:
-
-```bash
-git clone https://github.com/aitrustalliance/trp.git
-cd trp
-pip install -e .
-trp demo
-```
-
 ## Getting Started
 
 Read the specification in `spec/` for the full field-by-field definition. For a hands-on walkthrough, see the [Profile Authoring Guide](docs/authoring-guide.md), which takes you from an empty file to a validated, evaluator-tested profile in nine steps. Then look at the reference profiles in `examples/` to see the format in use across two domains:
@@ -137,9 +102,30 @@ Read the specification in `spec/` for the full field-by-field definition. For a 
 - **Manufacturing safety** (`examples/manufacturing-safety/trp.json`): a collaborative robot cell with scored signals for human distance, robot speed, vibration, temperature, model confidence, and data quality, plus hard rules for emergency stop, exclusion zone, and certification status.
 - **Healthcare data governance** (`examples/healthcare-data-governance/trp.json`): an AI system processing protected health information, with scored signals for de-identification confidence, consent coverage, subgroup performance gaps, and access log completeness, plus hard rules for HIPAA basis, IRB status, and data use agreements.
 
+To check a profile against the schema, use any standard JSON Schema validator (Draft 2020-12):
+
+```bash
+pip install jsonschema
+python -c "import json,jsonschema; jsonschema.Draft202012Validator(json.load(open('schema/trp.schema.json'))).validate(json.load(open('examples/manufacturing-safety/trp.json')))"
+```
+
+No output means the profile is valid.
+
+To evaluate data against a profile, use the TRP Reference Evaluator:
+
+```bash
+# Generate a sample with safe default values
+python3 tools/evaluate.py examples/manufacturing-safety/trp.json --generate-sample > sample.json
+
+# Evaluate the sample against the profile
+python3 tools/evaluate.py examples/manufacturing-safety/trp.json sample.json
+```
+
+The evaluator loads the profile, checks hard rules, scores signals against thresholds, tracks drift, and assigns a standing from the profile's declared bands. See `tools/README.md` for full documentation.
+
 ## Conformance Testing
 
-Conformance has two levels. A *valid* profile satisfies the structural and referential rules in the specification and validates against the schema. A *conformant* profile is a valid profile whose thresholds, rules, and bands reflect the requirements of a real domain and were set by a qualified author. Validation is automatic; whether a valid profile is also conformant is a judgment for the authoring authority and any reviewing body, not for a validator. See the specification for the full definitions.
+There are two levels. A *valid* profile satisfies the structural and referential rules in the specification and validates against the schema. A *conformant* profile is a valid profile whose thresholds, rules, and bands reflect the requirements of a real domain and were set by a qualified author. Validation is automatic; whether a valid profile is also conformant is a judgment for the authoring authority and any reviewing body, not for a validator. See the specification for the full definitions.
 
 The repository includes a conformance test suite that validates all profiles against the schema, verifies that intentionally malformed profiles are correctly rejected, and checks that the reference evaluator produces deterministic results for known inputs:
 
