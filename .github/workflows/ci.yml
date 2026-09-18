@@ -23,8 +23,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: pip install jsonschema
+      - name: Install package
+        run: pip install -e .
 
       - name: Run conformance test suite
         run: python tests/run_conformance.py --verbose
@@ -41,21 +41,13 @@ jobs:
 
       - name: Run evaluator against manufacturing example
         run: |
-          python tools/evaluate.py \
-            examples/manufacturing-safety/trp.json \
-            --generate-sample > /tmp/sample.json
-          python tools/evaluate.py \
-            examples/manufacturing-safety/trp.json \
-            /tmp/sample.json
+          trp sample examples/manufacturing-safety/trp.json > /tmp/sample.json
+          trp evaluate examples/manufacturing-safety/trp.json /tmp/sample.json
 
       - name: Run evaluator against healthcare example
         run: |
-          python tools/evaluate.py \
-            examples/healthcare-data-governance/trp.json \
-            --generate-sample > /tmp/sample.json
-          python tools/evaluate.py \
-            examples/healthcare-data-governance/trp.json \
-            /tmp/sample.json
+          trp sample examples/healthcare-data-governance/trp.json > /tmp/sample.json
+          trp evaluate examples/healthcare-data-governance/trp.json /tmp/sample.json
 
   cross-evaluator:
     name: Cross-evaluator agreement (Python + Node.js)
@@ -74,14 +66,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Python dependencies
-        run: pip install jsonschema
+      - name: Install Python package
+        run: pip install -e .
 
       - name: Cross-validate evaluators against all evidence
         run: |
           python3 -c "
           import glob, json, subprocess, sys
-          from tools.evaluate import load_profile, evaluate, DriftDetector
+          from trp.evaluate import load_profile, evaluate, DriftDetector
 
           VOLATILE = {'evaluated_at', 'result_hash', 'evaluator'}
 

@@ -29,11 +29,9 @@ except ImportError:
     print("ERROR: jsonschema is required.  pip install jsonschema")
     sys.exit(1)
 
-# Add project root to path so we can import the evaluator
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT / "tools"))
+from trp.evaluate import load_profile, evaluate, DriftDetector  # noqa: E402
 
-from evaluate import load_profile, evaluate, DriftDetector  # noqa: E402
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 # ---------------------------------------------------------------------------
